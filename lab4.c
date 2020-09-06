@@ -65,10 +65,7 @@ int main(int argc, char const *argv[]) {
 	int file = open(proc_file, O_CREAT | O_APPEND | O_RDWR, S_IWUSR | S_IRUSR);
 	size_t fsize = 100;
 	ftruncate(file, fsize);
-	int* dataPtr = (int*)mmap(NULL, fsize, PROT_READ | PROT_WRITE, MAP_SHARED, file, 0); //Создаем отображение файла в память
-// PROT_READ страницы могут быть прочитаны
-// PROT_WRITE стр могут быть описаны
-//  MAP_SHARED стр могут сипользоваться совместно с др процессами, которые также проектируют этот объект в память
+	int* dataPtr = (int*)mmap(NULL, fsize, PROT_READ | PROT_WRITE, MAP_SHARED, file, 0);
 	if (dataPtr == MAP_FAILED) 
 	{
 		perror("Map");
